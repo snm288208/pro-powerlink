@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../Services/api.services';
+import { MatTableModule } from '@angular/material/table';
 @Component({
   selector: 'app-standrdpricereport',
   standalone: true,
-  imports: [],
+  imports: [MatTableModule],
   templateUrl: './standrdpricereport.component.html',
   styleUrl: './standrdpricereport.component.scss'
 })
@@ -12,15 +13,20 @@ export class StandrdpricereportComponent implements OnInit {
 
   standardPriceList: any;
 
+  columnsToDisplay = ['Inventory Number'];
+
   ngOnInit(): void {
     this.getstandardPriceDetail();
   }
 
 
   getstandardPriceDetail() {
-    this.apiService.postApi('https://sandboxapi.benzeen.com/api/StandardPrice/GetStdBucketDetails', { "skuLogID": 5000, "bucketName": null }).subscribe(
+    this.apiService.postApi('https://sandboxapi.benzeen.com/erp/api/StandardPrice/GetStdBucketDetails', { "skuLogID": 5000, "bucketName": null }).subscribe(
       {
-        next: (v) => console.log(v),
+        next: (data) =>{
+          this.standardPriceList = data.result; 
+          console.log(this.standardPriceList);
+        },
         error: (e) => console.error(e),
         complete: () => console.info('complete')
       }
