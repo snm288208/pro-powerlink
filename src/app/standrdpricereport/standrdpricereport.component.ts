@@ -13,7 +13,7 @@ export class StandrdpricereportComponent implements OnInit {
 
   standardPriceList: any;
 
-  columnsToDisplay = ['Inventory Number'];
+  columnsToDisplay = ['Inventory Number', 'modelName', 'modelYear', 'inventoryId', 'edenName', 'price', 'mileage',  'createdDate', 'conditionsAndOptions' ,'AcquiredDate', 'acquiredAge'] ;
 
   ngOnInit(): void {
     this.getstandardPriceDetail();
